@@ -1,4 +1,4 @@
-import koneksi from "./koneksi.js"
+import koneksi from "./koneksi.js";
 
 //cek connection 
 koneksi.connect(function (err) {
