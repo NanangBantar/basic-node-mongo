@@ -2,17 +2,17 @@ import express from "express";
 import jwt from "jsonwebtoken";
 const router = express.Router();
 
-
-export const home = router.get("/", (req, res) => {
-    const jwtToken = req.cookies.token;
-    if (!jwtToken) {
-        res.redirect("/");
-    } else {
-        jwt.verify(jwtToken, process.env.TOKEN, (err, verifiedJwt) => {
-            if (err) {
-                res.redirect("/");
-            } else {
-                res.send(`
+export const home = () => {
+    return router.get("/home", (req, res) => {
+        const jwtToken = req.cookies.token;
+        if (!jwtToken) {
+            res.redirect("/");
+        } else {
+            jwt.verify(jwtToken, process.env.TOKEN, (err, verifiedJwt) => {
+                if (err) {
+                    res.redirect("/");
+                } else {
+                    res.send(`
                     <h1 style="text-align: center;">HOME</h1>
                     <ul>
                         <li><a style="text-decoration:none; font-weight:bold; color:blue;" href="/user">SHOW All USER</a></li>
@@ -46,7 +46,14 @@ export const home = router.get("/", (req, res) => {
                         </li>
                     </ul>
                     `);
-            }
-        });
-    }
-});
+                }
+            });
+        }
+    })
+}
+
+export const jajal = () => {
+    return router.get("/jajal", (req, res) => {
+        res.send("jajal");
+    });
+}

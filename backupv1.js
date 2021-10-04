@@ -6,7 +6,7 @@ const router = express.Router();
 
 // importing view
 import { login } from "./routes/auth/auth.js";
-import { home } from "./routes/home/home.js";
+import { home, jajal } from "./routes/home/home.js";
 
 dotenv.config();
 
@@ -24,25 +24,26 @@ koneksi.connect((err) => {
 
 app.use("/", login);
 app.use('/home', home);
+app.use('/jajal', jajal);
 
-// app.get('/login/:id/:name', (req, res) => {
-//     let { id, name } = req.params;
-//     koneksi.query(`SELECT * FROM data_karyawan WHERE id = '${id}' AND nama = '${name}'`, (err, result) => {
-//         if (err) throw err;
-//         console.log(result.length);
-//         if (result.length === 0) {
-//             res.send("Password atau Username anda salah");
-//         } else {
-//             const jwtToken = jwt.sign({ id }, process.env.TOKEN);
-//             res.cookie('token', jwtToken, {
-//                 secure: false,
-//                 httpOnly: false,
-//             });
-//             res.redirect("/home");
-//         }
-//     });
-//     koneksi.end();
-// });
+app.get('/login/:id/:name', (req, res) => {
+    let { id, name } = req.params;
+    koneksi.query(`SELECT * FROM data_karyawan WHERE id = '${id}' AND nama = '${name}'`, (err, result) => {
+        if (err) throw err;
+        console.log(result.length);
+        if (result.length === 0) {
+            res.send("Password atau Username anda salah");
+        } else {
+            const jwtToken = jwt.sign({ id }, process.env.TOKEN);
+            res.cookie('token', jwtToken, {
+                secure: false,
+                httpOnly: false,
+            });
+            res.redirect("/home");
+        }
+    });
+    koneksi.end();
+});
 
 
 

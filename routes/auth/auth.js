@@ -10,7 +10,7 @@ export const login = router.get("/", (req, res) => {
         res.send(`
         <h1 style="text-align:center;">LOGIN</h1>
         <ul>
-            <li><a style="text-decoration:none; font-weight:bold; color:blue; cursor:pointer;">SHOW All USER</a>
+            <li><a style="text-decoration:none; font-weight:bold; color:blue; cursor:pointer;">LOGIN USER</a>
             <br>You have to login first to using this WEB app
             <br>
             <br>do this format for login the WEB app
