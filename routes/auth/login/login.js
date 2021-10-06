@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const koneksi = require("../../../koneksi");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
-const e = require("express");
 
 koneksi.connect((err) => {
     if (err) throw err;
@@ -30,9 +30,15 @@ router.post("/",
                 if (!isMatch) {
                     return res.send("Username atau Password anda salah");
                 }
+                const token = jwt.sign(username, process.env.ACCESS_TOKEN);
+                res.cookie('token', token, {
+                    signed: true,
+                    httpOnly: false
+                });
+                res.send(token);
+            } else {
+                return res.send("Password atau username anda salah..!");
             }
         });
-        // const salt = await bcrypt.genSalt(10);
-        // const passwordhash = await bcrypt.hash(password, salt);
     });
 module.exports = router;
