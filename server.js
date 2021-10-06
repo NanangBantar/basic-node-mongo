@@ -5,20 +5,21 @@ const cookieParser = require("cookie-parser");
 
 dotenv.config();
 const app = express();
+
+// using template engine ejs
+app.set('view engine', 'ejs');
+
 app.use(cookieParser("secret"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(express.static('./public'));
+app.use(express.static('./assets'));
 
 // api
 app.use("/api/auth/login", require("./routes/auth/login/login"));
 
-// views
-app.use("/view", require("./public/view"));
-
 app.get("/", (req, res) => {
-    res.send(req.signedCookies)
+    res.render("pages/");
 });
 
 app.listen(process.env.SERVER_PORT, () => {
