@@ -1,33 +1,14 @@
-import koneksi from "./koneksi.js";
-import express from "express";
-import dotenv from "dotenv";
-import path from "path";
-import cookieParser from "cookie-parser";
-import { jajal, home } from "./routes/home/home.js";
-
+const express = require("express");
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
 
 dotenv.config();
-const __dirname = path.resolve();
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-koneksi.connect((err) => {
-    if (err) throw err;
-    koneksi.query(`use ${process.env.DB_NAME}`, (err, result) => {
-        if (err) throw err;
-        console.log("Database Connected");
-    });
-});
+app.use("/api/auth/login", require("./routes/auth/login/login"));
 
-app.use(express.static(__dirname + '/views'));
-app.set('view engine', 'ejs');
-
-app.get("/", (req, res) => {
-    res.render("containers/index");
-});
-
-app.get("/jajal", jajal());
-app.get("/home", home());
-
-app.listen(process.env.SERVER, () => {
-    console.log(`SERVER RUNNING AT PORT ${process.env.SERVER}`);
+app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server Running AT PORT ${process.env.SERVER_PORT}`);
 });
