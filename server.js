@@ -19,6 +19,10 @@ app.use(express.static('./assets'));
 app.use("/api/auth/login", require("./routes/auth/login/login"));
 
 app.get("/", (req, res) => {
+    res.render("pages/login/login.ejs");
+});
+
+app.get("/home", (req, res) => {
     res.render("pages/");
 });
 
