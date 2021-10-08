@@ -35,7 +35,8 @@ router.post("/",
                     signed: true,
                     httpOnly: false
                 });
-                res.send(token);
+                console.log(results);
+                res.redirect('/home');
             } else {
                 return res.send("Password atau username anda salah..!");
             }

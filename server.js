@@ -23,7 +23,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
+    if(!req.signedCookies){
+        res.redirect("/");
+    }
     res.render("pages/");
+});
+
+app.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.redirect("/");
 });
 
 app.listen(process.env.SERVER_PORT, () => {
