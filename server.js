@@ -15,20 +15,14 @@ app.use(bodyParser.json());
 
 app.use(express.static('./assets'));
 
-// api
+// login page management
 app.use("/api/auth/login", require("./routes/auth/login/login"));
+app.use("/", require("./routes/auth/login/login"));
 
-app.get("/", (req, res) => {
-    res.render("pages/login/login.ejs");
-});
+//home page management
+app.use("/home", require("./routes/pages/home/home"));
 
-app.get("/home", (req, res) => {
-    if(!req.signedCookies){
-        res.redirect("/");
-    }
-    res.render("pages/");
-});
-
+// logout action management
 app.get("/logout", (req, res) => {
     res.clearCookie("token");
     res.redirect("/");

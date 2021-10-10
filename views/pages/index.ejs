@@ -1,6 +1,12 @@
 <%- include('partials/head'); %>
 <%- include('partials/sidebar'); %>
 <article class="content dashboard-page">
-
+    <%
+    if(pages == 'Home'){
+        include('home/home')
+    }else{
+        include('home/home')
+    }
+    %>
 </article>
 <%- include('partials/footer'); %>
