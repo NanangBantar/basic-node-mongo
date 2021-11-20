@@ -1,1 +1,1 @@
-# basic-node-sql
+# basic-node-mongo
