@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const connectMongo = require("./connection/connectMongo");
 
 dotenv.config();
 const app = express();
@@ -9,6 +10,8 @@ app.use(cors());
 app.use(express.json({
     extended: false
 }));
+app.use(express.urlencoded({ extended: true }));
+connectMongo();
 
 // using template engine ejs
 app.set('view engine', 'ejs');
@@ -17,6 +20,7 @@ app.use(express.static('./assets'));
 
 // user api management
 app.use("/api/user", require("./routes/auth/login/login"));
+app.use("/api/createuser", require("./routes/auth/createUser/createUser"));
 
 // login page management
 app.get('/', function (req, res) {

@@ -15,19 +15,19 @@
                 </header>
                 <div class="auth-content">
                     <p class="text-center">REGISTER NEW ACCOUNT</p>
-                    <form id="login-form" method="POST">
+                    <form id="login-form" action="api/createuser" method="POST">
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control underlined" name="username"
-                                placeholder="Your username" required>
+                            <label>Email</label>
+                            <input type="email" class="form-control underlined" name="email"
+                                placeholder="Your email" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label>Password</label>
                             <input type="password" class="form-control underlined" name="password"
                                 placeholder="Your password" required>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-block btn-primary">Create</button>
                         </div>
                         <div class="form-group">
                             <a href="/" class="btn btn-block btn-primary">Already have an account</a>
