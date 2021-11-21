@@ -15,11 +15,11 @@
                 </header>
                 <div class="auth-content">
                     <p class="text-center">REGISTER NEW ACCOUNT</p>
-                    <form id="login-form" action="api/createuser" method="POST">
+                    <form id="login-form">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control underlined" name="email"
-                                placeholder="Your email" required>
+                            <input type="email" class="form-control underlined" name="email" placeholder="Your email"
+                                required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
@@ -46,6 +46,43 @@
     </div>
     <script src="js/vendor.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.getElementById("login-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            try {
+                const formData = {
+                    email: document.querySelector("input[name='email']").value,
+                    password: document.querySelector("input[name='password']").value
+                };
+                const resp = await axios.post("http://localhost:3000/api/createuser", formData);
+                $("#result-message").html(resp.data.msg);
+                $("#confirm-modal").modal("show");
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    </script>
+
+    <div class="modal fade" id="confirm-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-warning"></i> Alert</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="result-message">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </body>
 
     </html>
