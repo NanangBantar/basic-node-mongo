@@ -1,0 +1,20 @@
+<div class="card card-primary">
+    <div class="card-header">
+        <div class="header-block">
+            <p class="title text-white"> User ID : 
+                <%- data.id %>
+            </p>
+        </div>
+    </div>
+    <div class="card-block">
+        <p><span class="font-weight-bold">Email</span> : <%- data.email %></p>
+        <p><span class="font-weight-bold">Status</span> : 
+            <% if(_.isEmpty(data.user_data)){ %>
+                <i class="fa fa-times-circle-o text-danger"></i> Not Verified
+            <% }else{ %>
+                <i class="fa fa-check-circle-o text-success"></i> Verified
+            <% } %>
+        </p>
+    </div>
+    <div class="card-footer"> Card Footer </div>
+</div>
