@@ -17,9 +17,9 @@
                     <p class="text-center">LOGIN TO CONTINUE</p>
                     <form id="login-form" method="POST">
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control underlined" name="username"
-                                placeholder="Your username" required>
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control underlined" name="email"
+                                placeholder="Your email" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
@@ -46,6 +46,24 @@
     </div>
     <script src="js/vendor.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.getElementById("login-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            try {
+                const formData = {
+                    email: document.querySelector("input[name='email']").value,
+                    password: document.querySelector("input[name='password']").value
+                };
+                const resp = await axios.post("http://localhost:3000/api/user", formData);
+                console.log(resp.data);
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    </script>
     </body>
 
     </html>
