@@ -58,7 +58,7 @@
                     password: document.querySelector("input[name='password']").value
                 };
                 const resp = await axios.post("http://localhost:3000/api/user", formData);
-                console.log(resp.data);
+                window.location.href = "/home";
             } catch (error) {
                 console.log(error);
             }

@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectMongo = require("./connection/connectMongo");
+const authenticateJWT = require("./routes/auth/tokencheck/authenticateJWT");
 
 dotenv.config();
 const app = express();
@@ -21,15 +22,22 @@ app.use(express.static('./assets'));
 // user api management
 app.use("/api/user", require("./routes/auth/login/login"));
 app.use("/api/createuser", require("./routes/auth/createUser/createUser"));
+app.use("/api/logout", require("./routes/auth/logout/logout"));
 
 // login page management
 app.get('/', function (req, res) {
-    res.render("./pages/login/login");
+    if(req.signedCookies.secret) return res.redirect("/home");
+    return res.render("./pages/login/login");
 });
 
 // register page management
 app.get('/createaccount', function (req, res) {
-    res.render("./pages/create_account/create_account");
+    if(req.signedCookies.secret) return res.redirect("/home");
+    return res.render("./pages/create_account/create_account");
+});
+
+app.get('/home', authenticateJWT, function (req, res) {
+    return res.render("./pages", { pages: "Home" });
 });
 
 
