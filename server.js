@@ -44,7 +44,7 @@ app.get('/home', authenticateJWT, async (req, res) => {
     const resp = await data(req.user.email);
     return res.render("./pages", {
         pages: "home",
-        data: resp
+        data: resp,
     });
 });
 
