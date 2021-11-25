@@ -20,18 +20,6 @@ connectMongo();
 app.set('view engine', 'ejs');
 app.use(cookieParser("secret"));
 app.use(express.static('./assets'));
-app.helpers({
-    renderScriptsTags: function (all) {
-        if (all != undefined) {
-            return all.map(function (script) {
-                return '<script src="/javascripts/' + script + '"></script>';
-            }).join('\n ');
-        }
-        else {
-            return '';
-        }
-    }
-});
 
 // user api management
 app.use("/api/user", require("./routes/auth/login/login"));
