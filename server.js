@@ -21,10 +21,19 @@ app.set('view engine', 'ejs');
 app.use(cookieParser("secret"));
 app.use(express.static('./assets'));
 
+
+// start api mananegement ============================================
 // user api management
 app.use("/api/user", require("./routes/auth/login/login"));
 app.use("/api/createuser", require("./routes/auth/createUser/createUser"));
 app.use("/api/logout", require("./routes/auth/logout/logout"));
+
+
+// home api management
+app.use("/api/personaldata", require("./routes/pages/home/personaldata"));
+
+
+// end api mananegement ============================================
 
 // login page management
 app.get('/', function (req, res) {

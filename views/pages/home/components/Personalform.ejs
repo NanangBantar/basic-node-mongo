@@ -1,4 +1,4 @@
-<form role="form">
+<form id="form" role="form">
     <div class="row">
         <div class="form-group col-lg-6">
             <label>Nama Karyawan</label>
@@ -6,40 +6,40 @@
         </div>
         <div class="form-group col-lg-6">
             <label>Alamat KTP</label>
-            <input type="text" class="form-control boxed" placeholder="Alamat KTP" required>
+            <input name="alamat_ktp" type="text" class="form-control boxed" placeholder="Alamat KTP" required>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-6">
             <label>Nomor HP pribadi</label>
-            <input type="text" class="form-control boxed" placeholder="Nomor HP pribadi" required>
+            <input name="nomor_hp" type="text" class="form-control boxed" placeholder="Nomor HP pribadi" required>
         </div>
         <div class="form-group col-lg-6">
             <label>Nomor Serumah</label>
-            <input type="text" class="form-control boxed" placeholder="Nomor Serumah" required>
+            <input name="nomor_serumah" type="text" class="form-control boxed" placeholder="Nomor Serumah" required>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-6">
             <label>Jenis Kelamin</label>
-            <select class="form-control">
+            <select name="jenis_kelamin" class="form-control">
                 <option value="Laki - Laki" selected="">Laki - Laki</option>
                 <option value="Perempuan">Perempuan</option>
             </select>
         </div>
         <div class="form-group col-lg-6">
             <label>No KTP</label>
-            <input type="text" class="form-control boxed" placeholder="No KTP" required>
+            <input name="no_ktp" type="text" class="form-control boxed" placeholder="No KTP" required>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-6">
             <label>No SIM (Jika ada)</label>
-            <input type="text" class="form-control boxed" placeholder="No SIM (Jika ada)" required>
+            <input name="no_sim" type="text" class="form-control boxed" placeholder="No SIM (Jika ada)" required>
         </div>
         <div class="form-group col-lg-6">
             <label>No NPWP (Jika ada)</label>
-            <input type="text" class="form-control boxed" placeholder="No NPWP (Jika ada)" required>
+            <input name="no_npwp" type="text" class="form-control boxed" placeholder="No NPWP (Jika ada)" required>
         </div>
     </div>
     <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
