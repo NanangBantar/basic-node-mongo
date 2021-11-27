@@ -2,21 +2,21 @@
     <div class="row">
         <div class="form-group col-lg-6">
             <label>Nama Karyawan</label>
-            <input name="nama_karyawan" type="text" class="form-control boxed" placeholder="Nama Karyawan" required>
+            <input name="nama_karyawan" value="<%= _.get(data.user_data, 'nama_karyawan' ); %>" type="text" class="form-control boxed" placeholder="Nama Karyawan" required>
         </div>
         <div class="form-group col-lg-6">
             <label>Alamat KTP</label>
-            <input name="alamat_ktp" type="text" class="form-control boxed" placeholder="Alamat KTP" required>
+            <input name="alamat_ktp" value="<%= _.get(data.user_data, 'alamat_ktp' ); %>" type="text" class="form-control boxed" placeholder="Alamat KTP" required>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-6">
             <label>Nomor HP pribadi</label>
-            <input name="nomor_hp" type="text" class="form-control boxed" placeholder="Nomor HP pribadi" required>
+            <input name="nomor_hp" value="<%= _.get(data.user_data, 'nomor_hp' ); %>" type="text" class="form-control boxed" placeholder="Nomor HP pribadi" required>
         </div>
         <div class="form-group col-lg-6">
             <label>Nomor Serumah</label>
-            <input name="nomor_serumah" type="text" class="form-control boxed" placeholder="Nomor Serumah" required>
+            <input name="nomor_serumah" value="<%= _.get(data.user_data, 'nomor_serumah' ); %>" type="text" class="form-control boxed" placeholder="Nomor Serumah" required>
         </div>
     </div>
     <div class="row">
@@ -29,19 +29,20 @@
         </div>
         <div class="form-group col-lg-6">
             <label>No KTP</label>
-            <input name="no_ktp" type="text" class="form-control boxed" placeholder="No KTP" required>
+            <input name="no_ktp" value="<%= _.get(data.user_data, 'no_ktp' ); %>" type="text" class="form-control boxed" placeholder="No KTP" required>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-6">
             <label>No SIM (Jika ada)</label>
-            <input name="no_sim" type="text" class="form-control boxed" placeholder="No SIM (Jika ada)" required>
+            <input name="no_sim" value="<%= _.get(data.user_data, 'no_sim' ); %>" type="text" class="form-control boxed" placeholder="No SIM (Jika ada)" required>
         </div>
         <div class="form-group col-lg-6">
             <label>No NPWP (Jika ada)</label>
-            <input name="no_npwp" type="text" class="form-control boxed" placeholder="No NPWP (Jika ada)" required>
+            <input name="no_npwp" value="<%= _.get(data.user_data, 'no_npwp' ); %>" type="text" class="form-control boxed" placeholder="No NPWP (Jika ada)" required>
         </div>
     </div>
     <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
 </form>
 <script src="js/pages/home/personaldata/submit.js"></script>
+<%- include('../../common/basicmodal'); %>
