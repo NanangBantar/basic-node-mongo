@@ -31,7 +31,7 @@ app.use("/api/logout", require("./routes/auth/logout/logout"));
 
 // home api management
 app.use("/api/personaldata", require("./routes/pages/home/personaldata"));
-
+app.use("/api/attendancedata", require("./routes/pages/home/attendancedata"));
 
 // end api mananegement ============================================
 
