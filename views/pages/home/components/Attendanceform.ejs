@@ -1,0 +1,26 @@
+<form id="form" role="form">
+    <div class="row">
+        <div class="form-group col-lg-3">
+            <label>Jam Masuk</label>
+            <input name="jam_masuk" type="time"
+                class="form-control boxed" placeholder="Nama Karyawan" required>
+        </div>
+        <div class="form-group col-lg-3">
+            <label>Jam Istirahat</label>
+            <input name="jam_istirahat" type="time"
+                class="form-control boxed" placeholder="Alamat KTP" required>
+        </div>
+        <div class="form-group col-lg-3">
+            <label>Jam Selesai Istirahat</label>
+            <input name="jam_selesai_istrahat" type="time"
+                class="form-control boxed" placeholder="Alamat KTP" required>
+        </div>
+        <div class="form-group col-lg-3">
+            <label>Jam Pulang</label>
+            <input name="jam_pulang" type="time"
+                class="form-control boxed" placeholder="Alamat KTP" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
+</form>
+<%- include('../../common/basicmodal'); %>
