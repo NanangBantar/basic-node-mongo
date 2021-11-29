@@ -25,7 +25,7 @@ router.post("/", authenticateJWT, [
         });
         if (user) {
             const nextState = produce(user, draft => {
-                draft[0].user_data = {
+                draft[0].user_data.personal_data = {
                     nama_karyawan,
                     alamat_ktp,
                     nomor_hp,
@@ -39,7 +39,7 @@ router.post("/", authenticateJWT, [
             await User.findOneAndUpdate(
                 { email },
                 {
-                    $set: { user_data: nextState[0].user_data }
+                    $set: { "user_data.personal_data": nextState[0].user_data.personal_data }
                 }
             );
             return res.json({
