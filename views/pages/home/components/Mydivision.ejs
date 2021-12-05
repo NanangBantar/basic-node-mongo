@@ -1,13 +1,42 @@
 <form id="form1" role="form">
-    <div class="form-group">
-        <label>Divisi</label>
-        <select class="js-example-basic-single" name="state">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
-        </select>
+    <div class="row">
+        <div class="form-group col">
+            <label>Divisi</label>
+            <select style="width: 100%;" class="js-example-basic-single1" name="division">
+                <% _.map(divisionData, (e)=> { %>
+                    <option value="<%= e.name %>">
+                        <%= e.name %>
+                    </option>
+                    <% } ); %>
+            </select>
+        </div>
+        <div class="form-group col">
+            <label>Rank</label>
+            <select style="width: 100%;" class="js-example-basic-single2" name="rank">
+                <% let filteredDivision=_.filter(divisionData, (e)=> { return e.name === "CEO" } ); %>
+                    <% _.map(filteredDivision[0].rank, (e)=> { %>
+                        <option value="<%= e %>">
+                            <%= e %>
+                        </option>
+                        <% } ); %>
+            </select>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
 </form>
 <script>
-    $('.js-example-basic-single').select2();
+    $('.js-example-basic-single1').select2();
+    $('.js-example-basic-single2').select2();
+    $('.js-example-basic-single1').on('select2:select', function (e) {
+        let data = e.params.data;
+        let divisionData = JSON.parse('<%- JSON.stringify(divisionData) %>');
+        let filteredDivision = divisionData.filter(_ => {
+            return _.name === data.id
+        }).map((_) => _.rank)[0];
+        $(".js-example-basic-single2").html(filteredDivision.map(_ =>
+            `<option value="${_}">
+                ${_}
+            </option>`
+        ));
+    });
 </script>
