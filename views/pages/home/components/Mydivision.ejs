@@ -1,81 +1,53 @@
-<form id="form2" role="form">
-    <div class="row">
-        <div class="form-group col-lg-6">
-            <label>Divisi</label>
-            <select style="width: 100%;" class="js-example-basic-single1" name="division">
-                <% _.map(divisionData, (e)=> { %>
-                    <option value="<%= e.name %>" <% if(e.name===data.user_data.division_data.division){ %>
-                        selected
-                        <% } %>
-                            >
-                            <%= e.name %>
-                    </option>
-                    <% } ); %>
-            </select>
-        </div>
-        <div class="form-group col-lg-6">
-            <label>Rank</label>
-            <select style="width: 100%;" class="js-example-basic-single2" name="rank">
-                <% let filteredDivision=_.filter(divisionData, (e)=> { return e.name === "CEO" } ); %>
-                    <% _.map(filteredDivision[0].rank, (e)=> { %>
-                        <option value="<%= e %>" <% if(e===data.user_data.division_data.rank){ %>
-                            selected
-                            <% } %>
-                                >
-                                <%= e %>
-                        </option>
-                        <% } ); %>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col">
-            <label>Off Days ( <%= getNameOfDay(data.user_data.division_data.offdays ) %>)</label>
-            <select style="width: 100%;" class="js-example-basic-multiple" name="offdays[]" multiple="multiple"
-                required>
-                <% _.map(offDayData, (e)=> { %>
-                    <option value="<%= e.number %>">
-                        <%= e.name %>
-                    </option>
-                    <% } ); %>
-            </select>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
-</form>
-<script>
-    $('.js-example-basic-single1').select2();
-    $('.js-example-basic-single2').select2();
-    $('.js-example-basic-multiple').select2();
-    $('.js-example-basic-single1').on('select2:select', function (e) {
-        let data = e.params.data;
-        let divisionData = JSON.parse('<%- JSON.stringify(divisionData) %>');
-        let filteredDivision = divisionData.filter(_ => {
-            return _.name === data.id
-        }).map((_) => _.rank)[0];
-        $(".js-example-basic-single2").html(filteredDivision.map(_ =>
-            `<option value="${_}">
-                ${_}
-            </option>`
-        ));
-    });
-
-    document.getElementById("form2").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        try {
-            const formData = {
-                division: document.querySelector("select[name='division']").value,
-                rank: document.querySelector("select[name='rank']").value,
-                offdays: $(".js-example-basic-multiple").val()
-            };
-            const resp = await axios.post("http://localhost:3000/api/divisiondata", formData);
-            $("#result-message").html(resp.data.msg);
-            $("#confirm-modal").modal("show");
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
-        } catch (error) {
-            console.log(error);
-        }
-    });
-</script>
+<% let filterDivision=data.user_data.division_data ? data.user_data.division_data : "CEO" ; %>
+    <% let offdays=data.user_data.division_data ? data.user_data.division_data.offdays : [] ; %>
+        <form id="form2" role="form">
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label>
+                        Division
+                    </label>
+                    <select style="width: 100%;" class="js-example-basic-single1" name="division">
+                        <% _.map(divisionData, (e)=> { %>
+                            <option value="<%= e.name %>" <% if(e.name===filterDivision.division){ %>
+                                selected
+                                <% } %>
+                                    >
+                                    <%= e.name %>
+                            </option>
+                            <% } ); %>
+                    </select>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>
+                        Rank
+                    </label>
+                    <select style="width: 100%;" class="js-example-basic-single2" name="rank">
+                        <% let filteredDivision=_.filter(divisionData, (e)=> { return e.name
+                            ===filterDivision.division}); %>
+                            <% _.map(filteredDivision[0].rank, (e)=> { %>
+                                <option value="<%= e %>" <% if(e===filterDivision.rank){ %>
+                                    selected
+                                    <% } %>
+                                        >
+                                        <%= e %>
+                                </option>
+                                <% } ); %>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col">
+                    <label>Off Days ( <%= getNameOfDay(offdays) %>)</label>
+                    <select style="width: 100%;" class="js-example-basic-multiple" name="offdays[]" multiple="multiple"
+                        required>
+                        <% _.map(offDayData, (e)=> { %>
+                            <option value="<%= e.number %>">
+                                <%= e.name %>
+                            </option>
+                            <% } ); %>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
+        </form>
+        <script dataScript="<%= JSON.stringify(divisionData) %>" src="js/pages/home/divisiondata/submit.js"></script>
