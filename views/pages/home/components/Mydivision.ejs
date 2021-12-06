@@ -1,11 +1,14 @@
-<form id="form" role="form">
+<form id="form2" role="form">
     <div class="row">
         <div class="form-group col-lg-6">
             <label>Divisi</label>
             <select style="width: 100%;" class="js-example-basic-single1" name="division">
                 <% _.map(divisionData, (e)=> { %>
-                    <option value="<%= e.name %>">
-                        <%= e.name %>
+                    <option value="<%= e.name %>" <% if(e.name===data.user_data.division_data.division){ %>
+                        selected
+                        <% } %>
+                            >
+                            <%= e.name %>
                     </option>
                     <% } ); %>
             </select>
@@ -15,8 +18,11 @@
             <select style="width: 100%;" class="js-example-basic-single2" name="rank">
                 <% let filteredDivision=_.filter(divisionData, (e)=> { return e.name === "CEO" } ); %>
                     <% _.map(filteredDivision[0].rank, (e)=> { %>
-                        <option value="<%= e %>">
-                            <%= e %>
+                        <option value="<%= e %>" <% if(e===data.user_data.division_data.rank){ %>
+                            selected
+                            <% } %>
+                                >
+                                <%= e %>
                         </option>
                         <% } ); %>
             </select>
@@ -24,8 +30,9 @@
     </div>
     <div class="row">
         <div class="form-group col">
-            <label>Off Days</label>
-            <select style="width: 100%;" class="js-example-basic-multiple" name="states[]" multiple="multiple">
+            <label>Off Days ( <%= getNameOfDay(data.user_data.division_data.offdays ) %>)</label>
+            <select style="width: 100%;" class="js-example-basic-multiple" name="offdays[]" multiple="multiple"
+                required>
                 <% _.map(offDayData, (e)=> { %>
                     <option value="<%= e.number %>">
                         <%= e.name %>
@@ -51,5 +58,24 @@
                 ${_}
             </option>`
         ));
+    });
+
+    document.getElementById("form2").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+            const formData = {
+                division: document.querySelector("select[name='division']").value,
+                rank: document.querySelector("select[name='rank']").value,
+                offdays: $(".js-example-basic-multiple").val()
+            };
+            const resp = await axios.post("http://localhost:3000/api/divisiondata", formData);
+            $("#result-message").html(resp.data.msg);
+            $("#confirm-modal").modal("show");
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } catch (error) {
+            console.log(error);
+        }
     });
 </script>

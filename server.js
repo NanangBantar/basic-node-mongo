@@ -32,6 +32,7 @@ app.use("/api/logout", require("./routes/auth/logout/logout"));
 // home api management
 app.use("/api/personaldata", require("./routes/pages/home/personaldata"));
 app.use("/api/attendancedata", require("./routes/pages/home/attendancedata"));
+app.use("/api/divisiondata", require("./routes/pages/home/divisondata"));
 
 // end api mananegement ============================================
 
@@ -52,10 +53,12 @@ app.get("/home", authenticateJWT, async (req, res) => {
   const data = require("./views/pages/home/utils/data");
   const divisionData = require("./views/pages/home/utils/divisiondata");
   const offDayData = require("./views/pages/home/utils/offdaydata");
+  const getNameOfDay = require("./views/pages/home/helpers/getNameOfDay");
   const resp = await data(req.user.email);
   return res.render("./pages", {
     pages: "home",
     divisionData,
+    getNameOfDay,
     offDayData,
     data: resp,
   });

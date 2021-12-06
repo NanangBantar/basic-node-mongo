@@ -9,12 +9,9 @@ router.post(
   "/",
   authenticateJWT,
   [
-    check("nama_karyawan").not().isEmpty(),
-    check("alamat_ktp").not().isEmpty(),
-    check("nomor_hp").not().isEmpty(),
-    check("nomor_serumah").not().isEmpty(),
-    check("jenis_kelamin").not().isEmpty(),
-    check("no_ktp").not().isEmpty(),
+    check("division").not().isEmpty(),
+    check("rank").not().isEmpty(),
+    check("offdays").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -22,44 +19,33 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const {
-        nama_karyawan,
-        alamat_ktp,
-        nomor_hp,
-        nomor_serumah,
-        jenis_kelamin,
-        no_ktp,
-        no_sim,
-        no_npwp,
-      } = req.body;
+      const { division, rank, offdays } = req.body;
       const { email } = req.user;
+
       let user = await User.find({
         email,
       });
+
       if (user) {
         const nextState = produce(user, (draft) => {
-          draft[0].user_data.personal_data = {
-            nama_karyawan,
-            alamat_ktp,
-            nomor_hp,
-            nomor_serumah,
-            jenis_kelamin,
-            no_ktp,
-            no_sim,
-            no_npwp,
+          draft[0].user_data.division = {
+            division,
+            rank,
+            offdays,
           };
         });
+
         await User.findOneAndUpdate(
           { email },
           {
             $set: {
-              "user_data.personal_data": nextState[0].user_data.personal_data,
+              "user_data.division_data": nextState[0].user_data.division,
             },
           }
         );
         return res.json({
           status: "success",
-          msg: "Personal data successfully updated..!",
+          msg: "Division data successfully updated..!",
         });
       }
       return res.json({
