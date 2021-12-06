@@ -51,10 +51,12 @@ app.get("/createaccount", function (req, res) {
 app.get("/home", authenticateJWT, async (req, res) => {
   const data = require("./views/pages/home/utils/data");
   const divisionData = require("./views/pages/home/utils/divisiondata");
+  const offDayData = require("./views/pages/home/utils/offdaydata");
   const resp = await data(req.user.email);
   return res.render("./pages", {
     pages: "home",
     divisionData,
+    offDayData,
     data: resp,
   });
 });
