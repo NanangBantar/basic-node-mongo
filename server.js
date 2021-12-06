@@ -2,9 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+var minifyHTML = require("express-minify-html-2");
+const _ = require("lodash");
 const connectMongo = require("./connection/connectMongo");
 const authenticateJWT = require("./routes/auth/tokencheck/authenticateJWT");
-const _ = require("lodash");
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,20 @@ app.use(
 );
 app.locals._ = _;
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  minifyHTML({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+      removeComments: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeEmptyAttributes: true,
+      minifyJS: true,
+    },
+  })
+);
 connectMongo();
 
 // using template engine ejs
