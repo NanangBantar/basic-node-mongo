@@ -24,7 +24,7 @@
                     <select style="width: 100%;" class="js-example-basic-single2" name="rank">
                         <% let filteredDivision=_.filter(divisionData, (e)=> { return e.name
                             ===filterDivision.division}); %>
-                            <% _.map(filteredDivision[0].rank, (e)=> { %>
+                            <% _.map(filteredDivision[0]?.rank, (e)=> { %>
                                 <option value="<%= e %>" <% if(e===filterDivision.rank){ %>
                                     selected
                                     <% } %>
@@ -51,4 +51,6 @@
             <%- include('Contractcard'); %>
                 <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
         </form>
-        <script dataScript="<%= JSON.stringify(divisionData) %>" src="js/pages/home/divisiondata/submit.js"></script>
+        <script dataScript="<%= JSON.stringify(divisionData) %>"
+            contractmodaldetail="<%= JSON.stringify(contractmodaldetail) %>"
+            src="js/pages/home/divisiondata/submit.js"></script>

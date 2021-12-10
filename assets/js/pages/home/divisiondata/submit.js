@@ -1,4 +1,11 @@
 const dataScript = document.currentScript.getAttribute("dataScript");
+const contractmodaldetail = document.currentScript.getAttribute(
+  "contractmodaldetail"
+);
+
+$.getScript("js/pages/home/divisiondata/modalcontractdetail.js", () => {
+  showModalContractDetails(contractmodaldetail);
+});
 
 $(".js-example-basic-single1").select2();
 $(".js-example-basic-single2").select2();
@@ -29,10 +36,7 @@ document.getElementById("form2").addEventListener("submit", async (e) => {
       rank: document.querySelector("select[name='rank']").value,
       offdays: $(".js-example-basic-multiple").val(),
     };
-    const resp = await axios.post(
-      "http://localhost:3000/api/divisiondata",
-      formData
-    );
+    const resp = await axios.post("api/divisiondata", formData);
     $("#result-message").html(resp.data.msg);
     $("#confirm-modal").modal("show");
     setTimeout(() => {

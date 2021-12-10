@@ -69,11 +69,13 @@ app.get("/home", authenticateJWT, async (req, res) => {
   const divisionData = require("./views/pages/home/utils/divisiondata");
   const offDayData = require("./views/pages/home/utils/offdaydata");
   const getNameOfDay = require("./views/pages/home/helpers/getNameOfDay");
+  const contractmodaldetail = require("./views/pages/home/utils/contractmodaldetail");
   const resp = await data(req.user.email);
   return res.render("./pages", {
     pages: "home",
     divisionData,
     getNameOfDay,
+    contractmodaldetail,
     offDayData,
     data: resp,
   });
