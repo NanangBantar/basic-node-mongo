@@ -12,6 +12,7 @@ router.post(
     check("division").not().isEmpty(),
     check("rank").not().isEmpty(),
     check("offdays").not().isEmpty(),
+    check("full_sallary").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -19,7 +20,15 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const { division, rank, offdays } = req.body;
+      const {
+        division,
+        rank,
+        offdays,
+        full_sallary,
+        attendance_compensation,
+        transport_compensation,
+        launch_compensation,
+      } = req.body;
       const { email } = req.user;
 
       let user = await User.find({
@@ -32,6 +41,10 @@ router.post(
             division,
             rank,
             offdays,
+            full_sallary,
+            attendance_compensation,
+            transport_compensation,
+            launch_compensation,
           };
         });
 
