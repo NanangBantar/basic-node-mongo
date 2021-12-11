@@ -48,7 +48,7 @@
                     </select>
                 </div>
             </div>
-            <%- include('Contractcard'); %>
+            <%- include('Contractcard', { filterDivision }); %>
                 <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
         </form>
         <script dataScript="<%= JSON.stringify(divisionData) %>"

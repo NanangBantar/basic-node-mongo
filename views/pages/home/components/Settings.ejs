@@ -1,1 +1,20 @@
-Settings
+<form id="form3" role="form">
+    <div class="form-group">
+        <label>Current Password</label>
+        <input value="<%= _.get(data, 'password' ); %>" type="text" class="form-control boxed"
+            placeholder="Nama Karyawan" readonly>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-6">
+            <label>New Password</label>
+            <input name="new_password" type="text" class="form-control boxed" placeholder="New Password" required>
+        </div>
+        <div class="form-group col-lg-6">
+            <label>Retype Password</label>
+            <input name="retype_new_password" type="text" class="form-control boxed" placeholder="Retype Password"
+                required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
+</form>
+<script src="js/pages/home/settingdata/submit.js"></script>

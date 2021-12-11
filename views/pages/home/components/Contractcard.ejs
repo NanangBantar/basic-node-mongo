@@ -11,25 +11,25 @@
         <div class="row">
             <div class="form-group col-lg-6">
                 <label>Full Sallary</label>
-                <input name="full_sallary" value="" type="number" class="form-control boxed" placeholder="Full Sallary"
-                    required>
+                <input name="full_sallary" value="<%= _.get(filterDivision, 'full_sallary' ); %>" type="number"
+                    class="form-control boxed" placeholder="Full Sallary" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Attendance</label>
-                <input name="attendance_compensation" value="" type="number" class="form-control boxed"
-                    placeholder="Attendance" readonly>
+                <input name="attendance_compensation" value="<%= _.get(filterDivision, 'attendance_compensation' ); %>"
+                    type="number" class="form-control boxed" placeholder="Attendance" readonly>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-lg-6">
                 <label>Transport</label>
-                <input name="transport_compensation" value="" type="number" class="form-control boxed"
-                    placeholder="Transport" readonly>
+                <input name="transport_compensation" value="<%= _.get(filterDivision, 'transport_compensation' ); %>"
+                    type="number" class="form-control boxed" placeholder="Transport" readonly>
             </div>
             <div class="form-group col-lg-6">
                 <label>Launch</label>
-                <input name="launch_compensation" value="" type="number" class="form-control boxed" placeholder="Launch"
-                    readonly>
+                <input name="launch_compensation" value="<%= _.get(filterDivision, 'launch_compensation' ); %>"
+                    type="number" class="form-control boxed" placeholder="Launch" readonly>
             </div>
         </div>
     </div>
