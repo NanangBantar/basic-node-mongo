@@ -48,6 +48,7 @@ app.use("/api/logout", require("./routes/auth/logout/logout"));
 app.use("/api/personaldata", require("./routes/pages/home/personaldata"));
 app.use("/api/attendancedata", require("./routes/pages/home/attendancedata"));
 app.use("/api/divisiondata", require("./routes/pages/home/divisondata"));
+app.use("/api/settingdata", require("./routes/pages/home/settingdata"));
 
 // end api mananegement ============================================
 
@@ -70,12 +71,14 @@ app.get("/home", authenticateJWT, async (req, res) => {
   const offDayData = require("./views/pages/home/utils/offdaydata");
   const getNameOfDay = require("./views/pages/home/helpers/getNameOfDay");
   const contractmodaldetail = require("./views/pages/home/utils/contractmodaldetail");
+  const retypepasswordmodal = require("./views/pages/home/utils/retypenewpassword");
   const resp = await data(req.user.email);
   return res.render("./pages", {
     pages: "home",
     divisionData,
     getNameOfDay,
     contractmodaldetail,
+    retypepasswordmodal,
     offDayData,
     data: resp,
   });
