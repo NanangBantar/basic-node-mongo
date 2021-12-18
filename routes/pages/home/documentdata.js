@@ -1,20 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const { produce } = require("immer");
-const { v4: uuidv4 } = require("uuid");
-const { check, validationResult } = require("express-validator");
+const multer = require("multer");
+const path = require("path");
 const authenticateJWT = require("../../auth/tokencheck/authenticateJWT");
 const User = require("../../../models/User");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "assets/js/pages/home/documentdata/images");
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 
 router.post(
   "/",
   authenticateJWT,
-  [check().not().isEmpty()],
+  upload.single("image_ktp"),
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
     try {
       const { image_ktp, image_sim, image_bpjs, image_npwp } = req.body;
       const { email } = req.user;
@@ -22,18 +30,24 @@ router.post(
         email,
       }).select("-_id -__v");
       if (user) {
+        let file = req.file;
         const nextState = produce(user, (draft) => {
           draft[0].user_data.document_data = {
-            image_ktp: uuidv4(),
-            image_sim: uuidv4(),
-            image_bpjs: uuidv4(),
-            image_npwp: uuidv4(),
+            image_ktp: file.filename,
+            image_sim,
+            image_bpjs,
+            image_npwp,
           };
           return draft[0];
         });
-
+        await User.findOneAndUpdate(
+          { email },
+          {
+            $set: nextState,
+          }
+        );
         return res.json({
-          nextState,
+          msg: "Document successfully updated...!",
         });
       }
       return res.json({

@@ -74,6 +74,7 @@ app.get("/home", authenticateJWT, async (req, res) => {
   const contractmodaldetail = require("./views/pages/home/utils/contractmodaldetail");
   const retypepasswordmodal = require("./views/pages/home/utils/retypenewpassword");
   const defaultimage = require("./views/pages/home/utils/defaultimage");
+  const documentImage = require("./views/pages/home/helpers/documentImage");
   const resp = await data(req.user.email);
   return res.render("./pages", {
     pages: "home",
@@ -81,6 +82,7 @@ app.get("/home", authenticateJWT, async (req, res) => {
     getNameOfDay,
     contractmodaldetail,
     retypepasswordmodal,
+    documentImage,
     defaultimage,
     offDayData,
     data: resp,
