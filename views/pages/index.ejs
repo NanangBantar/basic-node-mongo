@@ -1,8 +1,10 @@
 <%- include('partials/head'); %>
-<%- include('partials/sidebar'); %>
-<article class="content dashboard-page">
-    <% if (pages === 'home') { %>
-        <%- include('home/home'); %>
-    <% } %>
-</article>
-<%- include('partials/footer'); %>
+    <%- include('partials/sidebar'); %>
+        <article class="content dashboard-page">
+            <% if (pages==='home' ) { %>
+                <%- include('home/home'); %>
+                    <% }else if(pages==='attendance' ){ %>
+                        <%- include('attendance/attendance'); %>
+                            <% } %>
+        </article>
+        <%- include('partials/footer'); %>

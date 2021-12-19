@@ -1,66 +1,65 @@
-<% documentImage(); %>
-    <form id="form4" role="form" enctype="multipart/form-data">
-        <div class="row">
-            <div class="form-group col-lg-6 d-flex flex-column">
-                <div>
-                    <label>ID Card</label>
-                    <img style="height: 300px;" src="
+<form id="form4" role="form" enctype="multipart/form-data">
+    <div class="row">
+        <div class="form-group col-lg-6 d-flex flex-column">
+            <div>
+                <label>ID Card</label>
+                <img style="height: 300px;" src="
                 <% if(_.get(data.user_data.document_data, 'image_ktp') && _.get(data.user_data.document_data, 'image_ktp') !== 'undefined'){ %>
                     <%= 'js/pages/home/documentdata/images/'+_.get(data.user_data.document_data,'image_ktp') %>
                         <% }else{ %>
                             <%= defaultimage.src %>
                                 <% } %>
                                 " class="img-fluid w-100 mb-2" alt="...">
-                </div>
-                <div>
-                    <input name="image_ktp" type="file" accept="image/*" class="form-control boxed" required>
-                </div>
             </div>
-            <div class="form-group col-lg-6 d-flex flex-column">
-                <div>
-                    <label>Drive Card</label>
-                    <img style="height: 300px;" src="<% if(_.get(data.user_data.document_data, 'image_sim') && _.get(data.user_data.document_data, 'image_sim') !== 'undefined'){ %>
+            <div>
+                <input name="image_ktp" type="file" accept="image/*" class="form-control boxed" required>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 d-flex flex-column">
+            <div>
+                <label>Drive Card</label>
+                <img style="height: 300px;" src="<% if(_.get(data.user_data.document_data, 'image_sim') && _.get(data.user_data.document_data, 'image_sim') !== 'undefined'){ %>
                     <%= 'js/pages/home/documentdata/images/'+_.get(data.user_data.document_data,'image_sim') %>
                         <% }else{ %>
                             <%= defaultimage.src %>
                                 <% } %>
                                 " class="img-fluid w-100 mb-2" alt="...">
-                </div>
-                <div>
-                    <input name="image_sim" type="file" accept="image/*" class="form-control boxed">
-                </div>
+            </div>
+            <div>
+                <input name="image_sim" type="file" accept="image/*" class="form-control boxed">
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-lg-6 d-flex flex-column">
-                <div>
-                    <label>BPJS</label>
-                    <img style="height: 300px;" src="<% if(_.get(data.user_data.document_data, 'image_bpjs') && _.get(data.user_data.document_data, 'image_bpjs') !== 'undefined'){ %>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-6 d-flex flex-column">
+            <div>
+                <label>BPJS</label>
+                <img style="height: 300px;" src="<% if(_.get(data.user_data.document_data, 'image_bpjs') && _.get(data.user_data.document_data, 'image_bpjs') !== 'undefined'){ %>
                     <%= 'js/pages/home/documentdata/images/'+_.get(data.user_data.document_data,'image_bpjs') %>
                         <% }else{ %>
                             <%= defaultimage.src %>
                                 <% } %>
                                 " class="img-fluid w-100 mb-2" alt="...">
-                </div>
-                <div>
-                    <input name="image_bpjs" type="file" accept="image/*" class="form-control boxed">
-                </div>
             </div>
-            <div class="form-group col-lg-6 d-flex flex-column">
-                <div>
-                    <label>NPWP</label>
-                    <img style="height: 300px;" src="<% if(_.get(data.user_data.document_data, 'image_npwp') && _.get(data.user_data.document_data, 'image_npwp') !== 'undefined'){ %>
+            <div>
+                <input name="image_bpjs" type="file" accept="image/*" class="form-control boxed">
+            </div>
+        </div>
+        <div class="form-group col-lg-6 d-flex flex-column">
+            <div>
+                <label>NPWP</label>
+                <img style="height: 300px;" src="<% if(_.get(data.user_data.document_data, 'image_npwp') && _.get(data.user_data.document_data, 'image_npwp') !== 'undefined'){ %>
                     <%= 'js/pages/home/documentdata/images/'+_.get(data.user_data.document_data,'image_npwp') %>
                         <% }else{ %>
                             <%= defaultimage.src %>
                                 <% } %>
                                 " class="img-fluid w-100 mb-2" alt="...">
-                </div>
-                <div>
-                    <input name="image_npwp" type="file" accept="image/*" class="form-control boxed">
-                </div>
+            </div>
+            <div>
+                <input name="image_npwp" type="file" accept="image/*" class="form-control boxed">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
-    </form>
-    <script src="js/pages/home/documentdata/submit.js"></script>
+    </div>
+    <button type="submit" class="btn btn-primary mb-4 col">Submit</button>
+</form>
+<script src="js/pages/home/documentdata/submit.js"></script>

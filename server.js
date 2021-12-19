@@ -67,14 +67,15 @@ app.get("/createaccount", function (req, res) {
 
 // home page management
 app.get("/home", authenticateJWT, async (req, res) => {
-  const data = require("./views/pages/home/utils/data");
+  //common require
+  const data = require("./views/pages/common/utils/data");
+  const defaultimage = require("./views/pages/common/utils/defaultimage");
+
   const divisionData = require("./views/pages/home/utils/divisiondata");
   const offDayData = require("./views/pages/home/utils/offdaydata");
   const getNameOfDay = require("./views/pages/home/helpers/getNameOfDay");
   const contractmodaldetail = require("./views/pages/home/utils/contractmodaldetail");
   const retypepasswordmodal = require("./views/pages/home/utils/retypenewpassword");
-  const defaultimage = require("./views/pages/home/utils/defaultimage");
-  const documentImage = require("./views/pages/home/helpers/documentImage");
   const resp = await data(req.user.email);
   return res.render("./pages", {
     pages: "home",
@@ -82,9 +83,17 @@ app.get("/home", authenticateJWT, async (req, res) => {
     getNameOfDay,
     contractmodaldetail,
     retypepasswordmodal,
-    documentImage,
     defaultimage,
     offDayData,
+    data: resp,
+  });
+});
+
+app.get("/attendance", authenticateJWT, async (req, res) => {
+  const data = require("./views/pages/attendance/utils/data");
+  const resp = await data(req.user.email);
+  return res.render("./pages", {
+    pages: "attendance",
     data: resp,
   });
 });
