@@ -67,10 +67,10 @@ app.get("/createaccount", function (req, res) {
 
 // home page management
 app.get("/home", authenticateJWT, async (req, res) => {
-  //common require
+  // common require
   const data = require("./views/pages/common/utils/data");
   const defaultimage = require("./views/pages/common/utils/defaultimage");
-
+  // only this page require
   const divisionData = require("./views/pages/home/utils/divisiondata");
   const offDayData = require("./views/pages/home/utils/offdaydata");
   const getNameOfDay = require("./views/pages/home/helpers/getNameOfDay");
@@ -90,11 +90,15 @@ app.get("/home", authenticateJWT, async (req, res) => {
 });
 
 app.get("/attendance", authenticateJWT, async (req, res) => {
-  const data = require("./views/pages/attendance/utils/data");
+  // common require
+  const data = require("./views/pages/common/utils/data");
+  const defaultimage = require("./views/pages/common/utils/defaultimage");
+  // only this page require
   const resp = await data(req.user.email);
   return res.render("./pages", {
     pages: "attendance",
     data: resp,
+    defaultimage,
   });
 });
 
