@@ -1,14 +1,28 @@
-const express = require("express");
+const app = require("express")();
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-var minifyHTML = require("express-minify-html-2");
+const minifyHTML = require("express-minify-html-2");
 const _ = require("lodash");
 const connectMongo = require("./connection/connectMongo");
 const authenticateJWT = require("./routes/auth/tokencheck/authenticateJWT");
+const express = require("express");
 
 dotenv.config();
-const app = express();
+
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
+// app.io = io;
+
+io.on("connection", function (socket) {
+  console.log("A user connected");
+
+  //Whenever someone disconnects this piece of code executed
+  socket.on("disconnect", function () {
+    console.log("A user disconnected");
+  });
+});
+
 app.use(cors());
 app.use(
   express.json({
@@ -102,6 +116,6 @@ app.get("/attendance", authenticateJWT, async (req, res) => {
   });
 });
 
-app.listen(process.env.SERVER_PORT, () => {
+http.listen(process.env.SERVER_PORT, () => {
   console.log(`Server Running AT PORT ${process.env.SERVER_PORT}`);
 });
